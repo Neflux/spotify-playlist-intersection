@@ -48,7 +48,6 @@ if token:
     sp = spotipy.Spotify(auth=token)
 
     """
-    o = 0
     exit_cond = False
     outfile = open("library", 'wb')
     all_tracks = []
@@ -64,9 +63,6 @@ if token:
 
     pickle.dump(all_tracks, outfile)
     outfile.close()
-    """
-
-    """
     outfile = open("vselecta", 'wb')
 
     all_tracks = []
@@ -84,9 +80,6 @@ if token:
     pickle.dump(all_tracks, outfile)
     outfile.close()
     """
-
-    """
-    "
     with open("library", "rb") as infile:
         library = pickle.load(infile)
 
@@ -95,17 +88,16 @@ if token:
 
     print(len(library), len(vselecta))
 
+
     with open("intersect", 'wb') as outfile:
         intersection = [ltrack for ltrack in library for vtrack in vselecta if ltrack['track']['uri'] in vtrack['track']['uri']]
         pickle.dump(intersection, outfile)
-    
-    """
 
     with open("intersect", 'rb') as infile:
         intersect = pickle.load(infile)
         print(len(intersect))
-
-        show_track_pointer(inter)
+        for el in intersect:
+            print(el['track']['name'])
 
 else:
     print("Can't get token for", username)
